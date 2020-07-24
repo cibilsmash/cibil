@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>LIST</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+
+        <div class="row" style="padding-top: 50px">
+
+            <div class="container">
+
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+
+                    <table class="table">
+
+    <tr>
+
+        <th>username</th>
+
+        <th>password</th>
+
+        <th>Email</th>
+        <th>
+
+
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertmodal">Add users</button>
+
+
+                <div class="modal fade" id="insertmodal" role="dialog">
+                    <div class="modal-dialog">
+
+      <!-- Modal content-->
+                     <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                 <h4 class="modal-title">Add User</h4>
+                        </div>
+                        <div class="modal-body">
+
+                             <form action="/register" method="POST">
+
+    Username : <input type="text" name="user" required class="form-control"><br>
+
+    password : <input type="password" name="pass" required class="form-control"><br>
+
+    E-mail : <input type="email" name="email" required class="form-control"><br>
+
+    <input type="submit">
+
+
+                            </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+                    </div>
+
+                 </div>
+  </div>
+
+
+        </th>
+
+    </tr>
+
+     {% for row in employess %}
+
+     <tr>
+     <td>{{ row.username }}</td>
+     <td>{{ row.password }}</td>
+     <td>{{ row.email }}</td>
+
+     <td>
+
+         <a href="/delete/{{ row.id }}">
+             <button class="btn btn-danger">Delete</button>
+         </a>
+     </td>
+
+     <td>
+
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ row.id }}">Update</button>
+
+           <div class="modal fade" id="myModal{{ row.id }}" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update User</h4>
+        </div>
+        <div class="modal-body">
+
+            <form action="/update" method="POST">
+
+                <input type="hidden" name="user_id" value="{{ row.id }}">
+
+                <input type="text" value="{{ row.username }}" name="username" class="form-control"><br>
+                <input type="text" value="{{ row.password }}" name="password" class="form-control"><br>
+                <input type="text" value="{{ row.email }}" name="email" class="form-control"><br>
+
+                <center>
+                <button type="submit" class="btn btn-primary">Update </button>
+                </center>
+
+            </form>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+     </td>
+
+
+
+     </tr>
+
+
+    {% endfor %}
+
+
+</table>
+
+
+
+
+                </div>
+                <div class="col-lg-3"></div>
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+</body>
+</html>
